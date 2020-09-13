@@ -28,12 +28,19 @@ class PatientForm extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getPatientWithIdAttribute(){
+        return $this->patient_name . "($this->id)";
+    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function Reviews()
+    {
+        return $this->hasMany('App\Models\PatientReview', 'patient_form_id', 'id');
+    }
 
     /*
     |--------------------------------------------------------------------------

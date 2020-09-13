@@ -1,6 +1,18 @@
 <?php
 
 return [
+
+    "patient_name" => "اسم المريض",
+    "gender" => "الجنس",
+    "male" => "ذكر",
+    "female" => "أنثى",
+    "other" => "غير ذلك",
+
+    "earn" => "أجرة المراجعة",
+    "age" => "العمر",
+    "job" => "الوظيفة",
+    "qualification" => "المؤهلات",
+
     "family_status" => "الوضع العائلي",
     "pregnant" => "الحمل",
     "breastfeeding" => "الإرضاع",
@@ -48,7 +60,7 @@ return [
 
     "take_certain_medications" => "تناول أدوية معينة",
     "the_amount_of_fluid_needed" => "كمية السوائل اللازمة",
-    "severity_class_(F)" => "درجة الشدة (F)",
+    "severity_class_" => "درجة الشدة (F)",
     "daily_calories" => "السعرات الحرارية اليومية",
     "sugars" => "سكريات",
     "protein" => "البروتين",

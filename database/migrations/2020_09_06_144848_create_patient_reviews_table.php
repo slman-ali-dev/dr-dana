@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PatientMeasurements extends Migration
+class CreatePatientReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class PatientMeasurements extends Migration
      */
     public function up()
     {
-        Schema::table('patient_measurements', function (Blueprint $table) {
+        Schema::create('patient_reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->bigInteger('patient_form_id');
+            $table->integer('earn')->unsigned()->default(0);
             
             $table->string('patient_height')->nullable();
             $table->string('current_weight')->nullable();
@@ -35,6 +36,9 @@ class PatientMeasurements extends Migration
             $table->string('the_chest')->nullable();
             $table->string('thigh')->nullable();
 
+
+                
+
             $table->timestamps();
         });
     }
@@ -46,8 +50,6 @@ class PatientMeasurements extends Migration
      */
     public function down()
     {
-        Schema::table('patient_measurements', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('patient_reviews');
     }
 }

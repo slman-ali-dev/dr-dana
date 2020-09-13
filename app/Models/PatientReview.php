@@ -5,7 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class PatientMeasurment extends Model
+class PatientReview extends Model
 {
     use CrudTrait;
 
@@ -15,7 +15,7 @@ class PatientMeasurment extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'patient_measurments';
+    protected $table = 'patient_reviews';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -28,12 +28,19 @@ class PatientMeasurment extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getPatientWithIdAttribute(){
+        return $this->Patient->patient_with_id;
+    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function Patient()
+    {
+        return $this->belongsTo('App\Models\PatientForm', 'patient_form_id', 'id');
+    }
 
     /*
     |--------------------------------------------------------------------------

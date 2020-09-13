@@ -14,8 +14,12 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
+    Route::get('/dashboard', 'DashboardController@index');
     Route::crud('patientform', 'PatientFormCrudController');
-    Route::crud('patientmeasurment', 'PatientMeasurmentCrudController');
+    Route::get('patientreview/ajax-patients-options', 'PatientReviewCrudController@patientOptions');
+    Route::crud('patientreview', 'PatientReviewCrudController');
     Route::crud('patientlaboratorytest', 'PatientLaboratoryTestCrudController');
-    Route::get('charts/weekly-users', 'Charts\WeeklyUsersChartController@response')->name('charts.weekly-users.index');
+    Route::get('charts/monthly-patients', 'Charts\MonthlyPatientsChartController@response')->name('charts.monthly-patients.index');
+    Route::get('charts/monthly-earnings', 'Charts\MonthlyEarningsChartController@response')->name('charts.monthly-earnings.index');
+    Route::get('charts/patients-gender', 'Charts\PatientsGenderChartController@response')->name('charts.patients-gender.index');
 }); // this should be the absolute last line of this file

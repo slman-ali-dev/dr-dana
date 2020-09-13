@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PatientForms extends Migration
+class CreatePatientFormsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class PatientForms extends Migration
      */
     public function up()
     {
-        Schema::table('patient_forms', function (Blueprint $table) {
+        Schema::create('patient_forms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('patient_name');
             $table->enum('gender', ['male', 'female','other']);
@@ -61,8 +61,6 @@ class PatientForms extends Migration
      */
     public function down()
     {
-        Schema::table('patient_forms', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('patient_forms');
     }
 }
