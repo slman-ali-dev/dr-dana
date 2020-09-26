@@ -34,6 +34,10 @@ class PatientLaboratoryTest extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function Patient()
+    {
+        return $this->belongsTo('App\Models\PatientForm', 'patient_form_id', 'id');
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -52,4 +56,12 @@ class PatientLaboratoryTest extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function getPatientWithIdAttribute()
+    {
+        return $this->Patient->patient_with_id;
+    }
+    public function getPatientNameAttribute()
+    {
+        return $this->Patient->patient_name;
+    }
 }

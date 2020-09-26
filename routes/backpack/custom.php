@@ -15,6 +15,7 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
     Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/calendar', 'CalendarController@index');
     Route::crud('patientform', 'PatientFormCrudController');
     Route::get('patientreview/ajax-patients-options', 'PatientReviewCrudController@patientOptions');
     Route::crud('patientreview', 'PatientReviewCrudController');

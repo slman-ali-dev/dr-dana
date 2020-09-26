@@ -98,4 +98,29 @@ class PatientLaboratoryTestCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+
+    /**
+     * Define what happens when the Show operation is loaded.
+     *
+     * @see https://backpackforlaravel.com/docs/crud-operation-Show
+     * @return void
+     */
+    protected function setupShowOperation()
+    {
+        $this->crud->addColumn(['name' => 'patient_form_id', 'label' => trans('backpack::common.id')]);
+        $this->crud->addColumn(['name' => 'patient_name', 'label' => trans('backpack::common.patient_name')]);
+
+        $this->crud->addColumn(['name' => 'date', 'label' => trans('backpack::common.date')]);
+        $this->crud->addColumn(['name' => 'sugar', 'label' => trans('backpack::common.sugar')]);
+        $this->crud->addColumn(['name' => 'pigment', 'label' => trans('backpack::common.pigment')]);
+        $this->crud->addColumn(['name' => 'cholesterol', 'label' => trans('backpack::common.cholesterol')]);
+        $this->crud->addColumn(['name' => 'triple_lipids', 'label' => trans('backpack::common.triple_lipids')]);
+        $this->crud->addColumn(['name' => 'ca', 'label' => trans('backpack::common.ca')]);
+        $this->crud->addColumn(['name' => 'na', 'label' => trans('backpack::common.na')]);
+        $this->crud->addColumn(['name' => 'k', 'label' => trans('k')]);
+        $this->crud->addColumn(['name' => 'total_protein', 'label' => trans('backpack::common.total_protein')]);
+
+    }
+
 }
