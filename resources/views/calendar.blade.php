@@ -1,26 +1,31 @@
 
 @extends(backpack_view('blank'))
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.0.0/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.0.0/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.0.0/main.min.js"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.0.0/main.min.css"/>
-
-
-@php
-
-
-
-@endphp
-
 @section('content')
+<div class="card">
+    <div class="card-header">
+        {{ trans('backpack::common.calendar') }}
+    </div>
 
-    {!! $calendar->calendar() !!}
-    {!! $calendar->script() !!}
+    <div class="card-body">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
 
+        <div id='calendar'></div>
+
+
+    </div>
+</div>
 @endsection
 
+@push('after_scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            events = {!! json_encode($events) !!};
+            $("#calendar").fullCalendar({
+                events:events,
+            });
+        });
+    </script>
+@endpush

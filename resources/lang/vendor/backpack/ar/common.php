@@ -8,6 +8,8 @@ return [
     "female" => "أنثى",
     "other" => "غير ذلك",
 
+    "calendar" => "التقويم",
+
     "last_review_date" => "تاريخ أخر مراجعة",
     "review_date" => "تاريخ المراجعة",
     "date" => "التاريخ",

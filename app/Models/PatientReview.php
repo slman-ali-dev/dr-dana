@@ -128,4 +128,8 @@ class PatientReview extends Model
     {
         return $this->Patient->patient_with_id;
     }
+    public function getPatientNameAttribute()
+    {
+        return $this->Patient->patient_name;
+    }
 }

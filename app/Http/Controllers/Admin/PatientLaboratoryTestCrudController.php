@@ -79,7 +79,55 @@ class PatientLaboratoryTestCrudController extends CrudController
     {
         CRUD::setValidation(PatientLaboratoryTestRequest::class);
 
-        CRUD::setFromDb(); // fields
+        
+        $this->crud->removeField('patient_form_id');
+
+        $this->crud->addField([  // Select
+            'label'     => "المريض",
+            'type'      => 'select2',
+            'name'      => 'patient_form_id', // the db column for the foreign key
+
+            // optional
+            // 'entity' should point to the method that defines the relationship in your Model
+            // defining entity will make Backpack guess 'model' and 'attribute'
+            'entity'    => 'Patient',
+
+            // optional - manually specify the related model and attribute
+            'model'     => "App\Models\PatientForm", // related model
+            'attribute' => 'patient_with_id', // foreign key attribute that is shown to user
+            'default' => '',
+
+            // optional - force the related options to be a custom query, instead of all();
+            'options'   => (function ($query) {
+                return $query->orderBy('updated_at', 'DESC')->get();
+            }), //  you can use this to filter the results show in the select
+        ]);
+
+        $this->crud->addField(
+            [   // DateTime
+                'name' => 'date',
+                'label' => 'تاريخ التحليل',
+                'type' => 'datetime_picker',
+                // optional:
+                'datetime_picker_options' => [
+                    'format' => 'DD/MM/YYYY HH:mm',
+                    'language' => 'en'
+                ],
+                'allows_null' => true,
+                // 'default' => '2017-05-12 11:59:59',
+            ],
+        );
+        
+
+        $this->crud->addField(['name' => 'date', 'label' => trans('backpack::common.date'), "type" => "datetime"]);
+        $this->crud->addField(['name' => 'sugar', 'label' => trans('backpack::common.sugar'), "type" => "text" ]);
+        $this->crud->addField(['name' => 'pigment', 'label' => trans('backpack::common.pigment'), "type" => "text" ]);
+        $this->crud->addField(['name' => 'cholesterol', 'label' => trans('backpack::common.cholesterol'), "type" => "text" ]);
+        $this->crud->addField(['name' => 'triple_lipids', 'label' => trans('backpack::common.triple_lipids'), "type" => "text" ]);
+        $this->crud->addField(['name' => 'ca', 'label' => trans('backpack::common.ca'), "type" => "text" ]);
+        $this->crud->addField(['name' => 'na', 'label' => trans('backpack::common.na'), "type" => "text" ]);
+        $this->crud->addField(['name' => 'k', 'label' => trans('k'), "type" => "text" ]);
+        $this->crud->addField(['name' => 'total_protein', 'label' => trans('backpack::common.total_protein'), "type" => "text" ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -111,7 +159,7 @@ class PatientLaboratoryTestCrudController extends CrudController
         $this->crud->addColumn(['name' => 'patient_form_id', 'label' => trans('backpack::common.id')]);
         $this->crud->addColumn(['name' => 'patient_name', 'label' => trans('backpack::common.patient_name')]);
 
-        $this->crud->addColumn(['name' => 'date', 'label' => trans('backpack::common.date')]);
+        $this->crud->addColumn(['name' => 'date', 'label' => trans('backpack::common.date'), "type" => "datetime"]);
         $this->crud->addColumn(['name' => 'sugar', 'label' => trans('backpack::common.sugar')]);
         $this->crud->addColumn(['name' => 'pigment', 'label' => trans('backpack::common.pigment')]);
         $this->crud->addColumn(['name' => 'cholesterol', 'label' => trans('backpack::common.cholesterol')]);
