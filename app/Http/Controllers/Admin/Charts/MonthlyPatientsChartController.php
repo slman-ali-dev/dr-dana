@@ -44,9 +44,9 @@ class MonthlyPatientsChartController extends ChartController
     public function data()
     {
         $patients = [];
-        
+
         for ($month = 1; $month <= 12; ++$month) {
-            $patients[] = PatientReview::whereMonth('created_at',$month)->count();
+            $patients[] = PatientReview::whereMonth('date',$month)->count();
         }
 
         $this->chart->dataset("المراجعات", 'line',$patients);

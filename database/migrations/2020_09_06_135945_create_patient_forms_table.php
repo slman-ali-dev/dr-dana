@@ -40,6 +40,9 @@ class CreatePatientFormsTable extends Migration
             $table->string('sleep')->nullable();
             $table->string('smoking')->nullable();
 
+            $table->string('BMI')->nullable();
+            $table->string('perfect_weight')->nullable();
+
             $table->string('take_certain_medications')->nullable();
             $table->string('the_amount_of_fluid_needed')->nullable();
             $table->string('severity_class_')->nullable();

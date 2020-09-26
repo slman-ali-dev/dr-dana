@@ -27,17 +27,17 @@ class MonthlyEarningsChartController extends ChartController
         // $this->chart->labels([
         //     'Today',
         // ]);
-        
-        
+
+
         $now = Carbon::now()->firstOfMonth();
         $labels = [];
         $earnings = [];
         for ($i = 0; $i < 12; ++$i) {
             $labels[] = "($now->year / $now->month)";
-            $earnings [] = PatientReview::whereMonth('created_at',$now->month)->sum('earn');
+            $earnings [] = PatientReview::whereMonth('date',$now->month)->sum('earn');
             $now->subMonth();
         }
-        
+
         $this->chart->labels(array_reverse($labels));
         $this->chart->dataset("الأرباح", 'line', array_reverse($earnings));
 
@@ -64,7 +64,7 @@ class MonthlyEarningsChartController extends ChartController
     //         $earnings [] = PatientReview::whereMonth('created_at',$now->month)->sum('earn');
     //         $now->subMonth();
     //     }
-        
+
     //     $this->chart->labels($labels);
     //     $this->chart->dataset("الأرباح", 'line', $earnings);
     // }

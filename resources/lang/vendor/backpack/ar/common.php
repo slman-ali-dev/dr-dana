@@ -8,6 +8,10 @@ return [
     "female" => "أنثى",
     "other" => "غير ذلك",
 
+    "last_review_date" => "تاريخ أخر مراجعة",
+    "review_date" => "تاريخ المراجعة",
+    "date" => "التاريخ",
+
     "earn" => "أجرة المراجعة",
     "age" => "العمر",
     "job" => "الوظيفة",
@@ -33,7 +37,8 @@ return [
     "loss_of_appetite" => "فقدان شهية",
     "sleep" => "النوم",
     "smoking" => "التدخين",
-    
+    "id" => "رقم المعرف",
+
     "patient_height" => "طول المريض",
     "current_weight" => "الوزن الحالي",
     "perfect_weight" => "الوزن المثالي",
@@ -67,5 +72,6 @@ return [
     "fats" => "دهون",
     "the_phone" => "الهاتف",
     "living" => "السكن",
+    "ca" => "كالسيوم",
 
 ];

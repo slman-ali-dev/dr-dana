@@ -13,7 +13,7 @@ class CreatePatientLaboratoryTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('laboratory_tests', function (Blueprint $table) {
+        Schema::create('patient_laboratory_tests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('patient_form_id');
 
@@ -25,6 +25,7 @@ class CreatePatientLaboratoryTestsTable extends Migration
             $table->string('na')->nullable();
             $table->string('k')->nullable();
             $table->string('total_protein')->nullable();
+            $table->date('date');
 
             $table->timestamps();
         });

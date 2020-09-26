@@ -2,6 +2,7 @@
 
 use App\Helpers\CommonHelpers;
 use App\Models\PatientForm;
+use App\Models\PatientLaboratoryTest;
 use App\Models\PatientReview;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -23,7 +24,7 @@ class PatientSeeder extends Seeder
         $startOfYear = $date->copy()->startOfYear()->timestamp;
         $endOfYear   = $date->copy()->endOfYear()->timestamp;
 
-        for ($i = 1; $i < 500; ++$i) {
+        for ($i = 1; $i < 150; ++$i) {
             $gender = $genders[rand(0,50) > 40 ? rand(0, 2) : rand(0,1)];
             $patient = PatientForm::create([
                 'patient_name' => $faker->name([$gender]),
@@ -32,14 +33,29 @@ class PatientSeeder extends Seeder
                 'job' => $faker->jobTitle,
                 'created_at' => mt_rand($startOfYear,$endOfYear)
             ]);
-            
+
             $reviews = rand(1, 5);
             while ($reviews-- > 0) {
                 $earn = rand(2000,7500);
                 PatientReview::create([
                     'patient_form_id' => $patient->id,
                     'earn' => $earn - ($earn % 100),
-                    'created_at' => rand($startOfYear,$endOfYear)
+                    'date' => Carbon::createFromTimestamp(rand($startOfYear,$endOfYear)),
+                    'patient_height' => rand(155,200),
+                    'current_weight' => rand(40,115)
+                ]);
+            }
+
+
+            $lab_tests = rand(1, 2);
+            while ($lab_tests-- > 0) {
+                PatientLaboratoryTest::create([
+                    'patient_form_id' => $patient->id,
+                    'ca' => rand(1,100),
+                    'date' => Carbon::createFromTimestamp(rand($startOfYear,$endOfYear)),
+                    'sugar' => rand(155,200),
+                    'pigment' => rand(40,115),
+                    'cholesterol' => rand(40,115)
                 ]);
             }
         }
