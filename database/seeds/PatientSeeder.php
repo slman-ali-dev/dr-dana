@@ -24,25 +24,27 @@ class PatientSeeder extends Seeder
         $startOfYear = $date->copy()->startOfYear()->timestamp;
         $endOfYear   = $date->copy()->endOfYear()->timestamp;
 
-        for ($i = 1; $i < 150; ++$i) {
-            $gender = $genders[rand(0,50) > 40 ? rand(0, 2) : rand(0,1)];
+        for ($i = 1; $i < 40; ++$i) {
+            $gender = $genders[rand(0, 50) > 40 ? rand(0, 2) : rand(0, 1)];
             $patient = PatientForm::create([
                 'patient_name' => $faker->name([$gender]),
                 'gender' => $gender,
                 'age' => rand(10, 85),
                 'job' => $faker->jobTitle,
-                'created_at' => mt_rand($startOfYear,$endOfYear)
+                'created_at' => mt_rand($startOfYear, $endOfYear),
+                'patient_height' => rand(155, 200)
             ]);
 
-            $reviews = rand(1, 5);
+            $reviews = rand(15, 20);
             while ($reviews-- > 0) {
-                $earn = rand(2000,7500);
+                $earn = rand(2000, 7500);
                 PatientReview::create([
                     'patient_form_id' => $patient->id,
                     'earn' => $earn - ($earn % 100),
-                    'date' => Carbon::createFromTimestamp(rand($startOfYear,$endOfYear)),
-                    'patient_height' => rand(155,200),
-                    'current_weight' => rand(40,115)
+                    'date' => Carbon::createFromTimestamp(rand($startOfYear, $endOfYear)),
+                    'current_weight' => rand(40, 115),
+                    'fat_percentage' => rand(2, 11),
+                    'fluid_ratio' => rand(20, 60)
                 ]);
             }
 
@@ -51,11 +53,11 @@ class PatientSeeder extends Seeder
             while ($lab_tests-- > 0) {
                 PatientLaboratoryTest::create([
                     'patient_form_id' => $patient->id,
-                    'ca' => rand(1,100),
-                    'date' => Carbon::createFromTimestamp(rand($startOfYear,$endOfYear)),
-                    'sugar' => rand(155,200),
-                    'pigment' => rand(40,115),
-                    'cholesterol' => rand(40,115)
+                    'ca' => rand(1, 100),
+                    'date' => Carbon::createFromTimestamp(rand($startOfYear, $endOfYear)),
+                    'sugar' => rand(155, 200),
+                    'pigment' => rand(40, 115),
+                    'cholesterol' => rand(40, 115)
                 ]);
             }
         }

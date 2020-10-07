@@ -29,6 +29,9 @@ return [
     "gastric_ulcer" => "القرحة المعدية",
     "past_surgery" => "إجراء عمليات جراحية سابقة",
     "health_assessment" => "التقييم الصحي",
+    "health_assessment_teeth" => "الأسنان",
+    "health_assessment_gum" => "اللثة",
+    "health_assessment_hairfall" => "تساقط الشعر",
     "gastric_ulcer" => "القرحة المعدية",
     "Acidity" => "الحموضة",
     "colon_spasms" => "تشنجات الكولون",
@@ -55,7 +58,7 @@ return [
     "circumference_of_the_upper_arm_and_wrist" => "محيط العضد والمعصم",
     "waistline" => "محيط الخصر",
     "hip" => "الورك",
-    "the_chest" => "الصدر",
+    "chest" => "الصدر",
     "thigh" => "الفخذ",
 
     "sugar" => "السكر",
@@ -72,9 +75,10 @@ return [
     "sugars" => "سكريات",
     "protein" => "البروتين",
     "fats" => "دهون",
-    "the_phone" => "الهاتف",
+    "phone" => "الهاتف",
     "living" => "السكن",
     "ca" => "كالسيوم",
     "na" => "صوديوم",
+    "childs_no" => "عدد الأولاد",
 
 ];

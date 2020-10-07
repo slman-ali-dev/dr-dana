@@ -21,8 +21,8 @@ class CreatePatientReviewsTable extends Migration
 
             $table->dateTime('date')->nullable()->index();
 
-            $table->string('patient_height')->nullable();
             $table->string('current_weight')->nullable();
+            $table->string('perfect_weight')->nullable();
             $table->string('fat_percentage')->nullable();
             $table->string('fluid_ratio')->nullable();
             $table->string('muscle_ratio')->nullable();
@@ -33,7 +33,7 @@ class CreatePatientReviewsTable extends Migration
             $table->string('circumference_of_the_upper_arm_and_wrist')->nullable();
             $table->string('waistline')->nullable();
             $table->string('hip')->nullable();
-            $table->string('the_chest')->nullable();
+            $table->string('chest')->nullable();
             $table->string('thigh')->nullable();
 
             $table->index(['patient_form_id', 'date']);

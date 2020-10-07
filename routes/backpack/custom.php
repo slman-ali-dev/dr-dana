@@ -23,4 +23,7 @@ Route::group([
     Route::get('charts/monthly-patients', 'Charts\MonthlyPatientsChartController@response')->name('charts.monthly-patients.index');
     Route::get('charts/monthly-earnings', 'Charts\MonthlyEarningsChartController@response')->name('charts.monthly-earnings.index');
     Route::get('charts/patients-gender', 'Charts\PatientsGenderChartController@response')->name('charts.patients-gender.index');
+
+    Route::post('patientform/store', 'PatientFormCrudController@store')->name('patientFormStore');
+    Route::get('patientreviewshistory/{patientId}', 'PatientFormCrudController@reviewsHistory')->name('patientReviewsHistory');
 }); // this should be the absolute last line of this file

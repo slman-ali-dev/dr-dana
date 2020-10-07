@@ -42,14 +42,15 @@ class PatientReviewCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->addFilter([
+        $this->crud->addFilter(
+            [
                 'name'  => 'patient_form_id',
                 'type'  => 'select2',
                 'label' => 'فلترة حسب المريض',
                 'placeholder' => 'اكتب اسم المريض للفلترة'
             ],
-            function(){
-                return PatientForm::all()->pluck('patient_with_id','id')->toArray();
+            function () {
+                return PatientForm::all()->pluck('patient_with_id', 'id')->toArray();
             },
             function ($value) { // if the filter is active
                 $this->crud->addClause('where', 'patient_form_id', $value);
@@ -59,7 +60,6 @@ class PatientReviewCrudController extends CrudController
         $this->crud->addColumn(['name' => 'patient_with_id', 'label' => trans('backpack::common.patient_name')]);
         $this->crud->addColumn(['name' => 'earn', 'label' => trans('backpack::common.earn')]);
         $this->crud->addColumn(['name' => 'date', 'label' => trans('backpack::common.review_date')]);
-        $this->crud->addColumn(['name' => 'patient_height', 'label' => trans('backpack::common.patient_height')]);
         $this->crud->addColumn(['name' => 'current_weight', 'label' => trans('backpack::common.current_weight')]);
         // $this->crud->addColumn(['name' => 'fat_percentage', 'label' => trans('backpack::common.fat_percentage')]);
         // $this->crud->addColumn(['name' => 'fluid_ratio', 'label' => trans('backpack::common.fluid_ratio')]);
@@ -71,18 +71,12 @@ class PatientReviewCrudController extends CrudController
         // $this->crud->addColumn(['name' => 'circumference_of_the_upper_arm_and_wrist', 'label' => trans('backpack::common.circumference_of_the_upper_arm_and_wrist')]);
         // $this->crud->addColumn(['name' => 'waistline', 'label' => trans('backpack::common.waistline')]);
         // $this->crud->addColumn(['name' => 'hip', 'label' => trans('backpack::common.hip')]);
-        // $this->crud->addColumn(['name' => 'the_chest', 'label' => trans('backpack::common.the_chest')]);
+        // $this->crud->addColumn(['name' => 'chest', 'label' => trans('backpack::common.chest')]);
         // $this->crud->addColumn(['name' => 'thigh', 'label' => trans('backpack::common.thigh')]);
 
         $request = $this->crud->getRequest();
         if (!$request->has('order')) {
-            $request->merge(['order' => [
-                [
-                    'column' => 'date',
-                    'dir' => 'desc'
-                ]
-            ]]);
-            $this->crud->orderBy("date","desc");
+            $this->crud->orderBy("date", "desc");
         }
     }
 
@@ -119,7 +113,7 @@ class PatientReviewCrudController extends CrudController
             }), //  you can use this to filter the results show in the select
         ]);
 
-        $this->crud->addField(['name' => 'earn', 'label' => trans('backpack::common.earn') . " (بالليرة السورية) " , 'type' => 'number' ]);
+        $this->crud->addField(['name' => 'earn', 'label' => trans('backpack::common.earn') . " (بالليرة السورية) ", 'type' => 'number']);
 
         $this->crud->addField(
             [   // DateTime
@@ -136,22 +130,21 @@ class PatientReviewCrudController extends CrudController
             ],
         );
 
-        $this->crud->addField(['name' => 'patient_height', 'label' => trans('backpack::common.patient_height') , 'type' => 'number' ]);
-        $this->crud->addField(['name' => 'current_weight', 'label' => trans('backpack::common.current_weight') , 'type' => 'number' ]);
+        $this->crud->addField(['name' => 'current_weight', 'label' => trans('backpack::common.current_weight'), 'type' => 'number']);
         // $this->crud->addField(['name' => 'perfect_weight', 'label' => trans('backpack::common.perfect_weight') , 'type' => 'number' ]);
-        $this->crud->addField(['name' => 'fat_percentage', 'label' => trans('backpack::common.fat_percentage') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'fluid_ratio', 'label' => trans('backpack::common.fluid_ratio') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'muscle_ratio', 'label' => trans('backpack::common.muscle_ratio') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'physical_activity', 'label' => trans('backpack::common.physical_activity') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'bone_mass', 'label' => trans('backpack::common.bone_mass') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'age_of_the_burn', 'label' => trans('backpack::common.age_of_the_burn') , 'type' => 'text' ]);
+        $this->crud->addField(['name' => 'fat_percentage', 'label' => trans('backpack::common.fat_percentage'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'fluid_ratio', 'label' => trans('backpack::common.fluid_ratio'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'muscle_ratio', 'label' => trans('backpack::common.muscle_ratio'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'physical_activity', 'label' => trans('backpack::common.physical_activity'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'bone_mass', 'label' => trans('backpack::common.bone_mass'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'age_of_the_burn', 'label' => trans('backpack::common.age_of_the_burn'), 'type' => 'text']);
         // $this->crud->addField(['name' => 'BMI', 'label' => trans('backpack::common.BMI') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'the_degree_of_obesity', 'label' => trans('backpack::common.the_degree_of_obesity') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'circumference_of_the_upper_arm_and_wrist', 'label' => trans('backpack::common.circumference_of_the_upper_arm_and_wrist') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'waistline', 'label' => trans('backpack::common.waistline') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'hip', 'label' => trans('backpack::common.hip') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'the_chest', 'label' => trans('backpack::common.the_chest') , 'type' => 'text' ]);
-        $this->crud->addField(['name' => 'thigh', 'label' => trans('backpack::common.thigh') , 'type' => 'text' ]);
+        $this->crud->addField(['name' => 'the_degree_of_obesity', 'label' => trans('backpack::common.the_degree_of_obesity'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'circumference_of_the_upper_arm_and_wrist', 'label' => trans('backpack::common.circumference_of_the_upper_arm_and_wrist'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'waistline', 'label' => trans('backpack::common.waistline'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'hip', 'label' => trans('backpack::common.hip'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'chest', 'label' => trans('backpack::common.chest'), 'type' => 'text']);
+        $this->crud->addField(['name' => 'thigh', 'label' => trans('backpack::common.thigh'), 'type' => 'text']);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -182,27 +175,27 @@ class PatientReviewCrudController extends CrudController
         // CRUD::setFromDb(); // fields
         // $this->crud->removeColumn('patient_name');
 
-        CRUD::addColumn(['name' => 'patient_form_id' , 'label'=> trans('backpack::common.id') , 'type'=>'text' ]);
-        CRUD::addColumn(['name' => 'patient_name' , 'label'=> trans('backpack::common.patient_name') , 'type'=>'text' ]);
-        
-        CRUD::addColumn(['name' => 'date' , 'label'=> trans('backpack::common.review_date') , 'type'=>'datetime' ]);
-        CRUD::addColumn(['name' => 'earn' , 'label'=> trans('backpack::common.earn') , 'type'=>'text' ]);
+        CRUD::addColumn(['name' => 'patient_form_id', 'label' => trans('backpack::common.id'), 'type' => 'text']);
+        CRUD::addColumn(['name' => 'patient_name', 'label' => trans('backpack::common.patient_name'), 'type' => 'text']);
 
-        $this->crud->addColumn(['name' => 'patient_height', 'label' => trans('backpack::common.patient_height') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'current_weight', 'label' => trans('backpack::common.current_weight') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'fat_percentage', 'label' => trans('backpack::common.fat_percentage') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'fluid_ratio', 'label' => trans('backpack::common.fluid_ratio') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'muscle_ratio', 'label' => trans('backpack::common.muscle_ratio') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'physical_activity', 'label' => trans('backpack::common.physical_activity') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'bone_mass', 'label' => trans('backpack::common.bone_mass') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'age_of_the_burn', 'label' => trans('backpack::common.age_of_the_burn') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'the_degree_of_obesity', 'label' => trans('backpack::common.the_degree_of_obesity') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'circumference_of_the_upper_arm_and_wrist', 'label' => trans('backpack::common.circumference_of_the_upper_arm_and_wrist') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'waistline', 'label' => trans('backpack::common.waistline') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'hip', 'label' => trans('backpack::common.hip') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'the_chest', 'label' => trans('backpack::common.the_chest') , 'type' => 'text' ]);
-        $this->crud->addColumn(['name' => 'thigh', 'label' => trans('backpack::common.thigh') , 'type' => 'text' ]);
+        CRUD::addColumn(['name' => 'date', 'label' => trans('backpack::common.review_date'), 'type' => 'datetime']);
+        CRUD::addColumn(['name' => 'earn', 'label' => trans('backpack::common.earn'), 'type' => 'text']);
 
+        $this->crud->addColumn(['name' => 'patient_height', 'label' => trans('backpack::common.patient_height'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'current_weight', 'label' => trans('backpack::common.current_weight'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'perfect_weight', 'label' => trans('backpack::common.perfect_weight'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'fat_percentage', 'label' => trans('backpack::common.fat_percentage'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'fluid_ratio', 'label' => trans('backpack::common.fluid_ratio'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'muscle_ratio', 'label' => trans('backpack::common.muscle_ratio'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'physical_activity', 'label' => trans('backpack::common.physical_activity'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'bone_mass', 'label' => trans('backpack::common.bone_mass'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'age_of_the_burn', 'label' => trans('backpack::common.age_of_the_burn'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'the_degree_of_obesity', 'label' => trans('backpack::common.the_degree_of_obesity'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'circumference_of_the_upper_arm_and_wrist', 'label' => trans('backpack::common.circumference_of_the_upper_arm_and_wrist'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'waistline', 'label' => trans('backpack::common.waistline'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'hip', 'label' => trans('backpack::common.hip'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'chest', 'label' => trans('backpack::common.chest'), 'type' => 'text']);
+        $this->crud->addColumn(['name' => 'thigh', 'label' => trans('backpack::common.thigh'), 'type' => 'text']);
     }
 
 

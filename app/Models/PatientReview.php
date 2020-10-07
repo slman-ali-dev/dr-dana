@@ -45,7 +45,7 @@ class PatientReview extends Model
     {
         $patient = $row->patient;
 
-        $height_m = $row->patient_height / 10;
+        $height_m = $patient->patient_height / 10;
 
         if ($height_m != 0) {
             $patient->BMI = $row->current_weight / ($height_m * $height_m);
@@ -55,14 +55,14 @@ class PatientReview extends Model
         if ($row->current_weight > 0) {
             $patient->the_amount_of_fluid_needed = 175 + ($row->current_weight * 15);
         }
-        if ($row->patient->gender == "male" && $row->patient_height > 0 && $row->current_weight > 0) {
-            $patient->daily_calories = 655.10 + (6.56 * $row->current_weight) + (1.85 * $row->patient_height) - (4.68 * $patient->age);
-        } else if ($row->patient->gender == "female" && $row->patient_height > 0 && $row->current_weight > 0) {
-            $patient->daily_calories = 66.7 + (13.75 * $row->current_weight) + (5 * $row->patient_height) - (6.76 * $patient->age);
+        if ($row->patient->gender == "male" && $patient->patient_height > 0 && $row->current_weight > 0) {
+            $patient->daily_calories = 655.10 + (6.56 * $row->current_weight) + (1.85 * $patient->patient_height) - (4.68 * $patient->age);
+        } else if ($row->patient->gender == "female" && $patient->patient_height > 0 && $row->current_weight > 0) {
+            $patient->daily_calories = 66.7 + (13.75 * $row->current_weight) + (5 * $patient->patient_height) - (6.76 * $patient->age);
         }
 
-        if ($row->patient_height > 0) {
-            $patient->perfect_weight = 100 - ($row->patient_height - 150) / 4;
+        if ($patient->patient_height > 0) {
+            $row->perfect_weight = $patient->patient_height - 100 - ($patient->patient_height - 150) / 4;
         }
 
         $patient->save();
@@ -73,7 +73,7 @@ class PatientReview extends Model
 
         $patient = $row->patient;
 
-        $height_m = $row->patient_height / 10;
+        $height_m = $patient->patient_height / 10;
 
         if ($height_m != 0) {
             $patient->BMI = $row->current_weight / ($height_m * $height_m);
@@ -83,14 +83,14 @@ class PatientReview extends Model
         if ($row->current_weight > 0) {
             $patient->the_amount_of_fluid_needed = 175 + ($row->current_weight * 15);
         }
-        if ($row->patient->gender == "male" && $row->patient_height > 0 && $row->current_weight > 0) {
-            $patient->daily_calories = 655.10 + (6.56 * $row->current_weight) + (1.85 * $row->patient_height) - (4.68 * $patient->age);
-        } else if ($row->patient->gender == "female" && $row->patient_height > 0 && $row->current_weight > 0) {
-            $patient->daily_calories = 66.7 + (13.75 * $row->current_weight) + (5 * $row->patient_height) - (6.76 * $patient->age);
+        if ($row->patient->gender == "male" && $patient->patient_height > 0 && $row->current_weight > 0) {
+            $patient->daily_calories = 655.10 + (6.56 * $row->current_weight) + (1.85 * $patient->patient_height) - (4.68 * $patient->age);
+        } else if ($row->patient->gender == "female" && $patient->patient_height > 0 && $row->current_weight > 0) {
+            $patient->daily_calories = 66.7 + (13.75 * $row->current_weight) + (5 * $patient->patient_height) - (6.76 * $patient->age);
         }
 
-        if ($row->patient_height > 0) {
-            $patient->perfect_weight = 100 - ($row->patient_height - 150) / 4;
+        if ($patient->patient_height > 0) {
+            $row->perfect_weight = $patient->patient_height - 100 - ($patient->patient_height - 150) / 4;
         }
 
         $patient->save();
