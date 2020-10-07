@@ -50,7 +50,14 @@ class PatientFormCrudController extends CrudController
     {
         // CRUD::removeButton("show");
 
-        CRUD::addColumn(['name' => 'patient_with_id', 'label' => trans('backpack::common.patient_name'), 'type' => 'text']);
+        CRUD::addColumn([
+            'name' => 'patient_with_id',
+            'label' => trans('backpack::common.patient_name'),
+            'type' => 'text',
+            'searchLogic' => function ($query, $column, $searchTerm) {
+                $query->orWhere('patient_name', 'like', '%' . $searchTerm . '%');  // at this own table
+            }
+        ]);
         CRUD::addColumn(['name' => 'gender_trans', 'label' => trans('backpack::common.gender'), 'type' => 'text']);
         CRUD::addColumn(['name' => 'age', 'label' => trans('backpack::common.age'), 'type' => 'text']);
         CRUD::addColumn(['name' => 'patient_height', 'label' => trans('backpack::common.patient_height'), 'type' => 'text']);

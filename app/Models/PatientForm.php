@@ -21,6 +21,7 @@ class PatientForm extends Model
     // public $timestamps = false;
     protected $guarded = ['id'];
     // protected $fillable = [];
+    protected $searchable = ['patient_with_id'];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -58,31 +59,35 @@ class PatientForm extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getPatientWithIdAttribute(){
+    public function getPatientWithIdAttribute()
+    {
         return $this->patient_name . "($this->id)";
     }
 
-    public function getGenderTransAttribute(){
-        return trans("backpack::common.".$this->gender);
+    public function getGenderTransAttribute()
+    {
+        return trans("backpack::common." . $this->gender);
     }
 
 
-    public function getLastReviewAttribute(){
-        $res = PatientReview::where("patient_form_id" , $this->id)
-                            ->whereDate("date", "<=", Carbon::now())
-                            ->orderBy("date","desc")
-                            ->get();
+    public function getLastReviewAttribute()
+    {
+        $res = PatientReview::where("patient_form_id", $this->id)
+            ->whereDate("date", "<=", Carbon::now())
+            ->orderBy("date", "desc")
+            ->get();
         return count($res) > 0 ? $res[0] : null;
     }
 
-    public function getLastReviewDateAttribute(){
+    public function getLastReviewDateAttribute()
+    {
         $res = $this->last_review;
         return $res != null ? $res->date : "لا يوجد";
     }
 
-    public function getWeightAttribute(){
+    public function getWeightAttribute()
+    {
         $res = $this->last_review;
         return $res != null ? $res->current_weight : 0;
     }
-
 }
