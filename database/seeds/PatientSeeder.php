@@ -23,7 +23,12 @@ class PatientSeeder extends Seeder
 
         $startOfYear = $date->copy()->startOfYear()->timestamp;
         $endOfYear   = $date->copy()->endOfYear()->timestamp;
-
+        $exists = [
+            "يوجد",
+            "لا يوجد",
+            "لا يوجد",
+            "لا يوجد",
+        ];
         for ($i = 1; $i < 40; ++$i) {
             $gender = $genders[rand(0, 50) > 40 ? rand(0, 2) : rand(0, 1)];
             $patient = PatientForm::create([
@@ -32,7 +37,9 @@ class PatientSeeder extends Seeder
                 'age' => rand(10, 85),
                 'job' => $faker->jobTitle,
                 'created_at' => mt_rand($startOfYear, $endOfYear),
-                'patient_height' => rand(155, 200)
+                'patient_height' => rand(155, 200),
+                'bco' => $exists[rand(0, 3)],
+                'diabetes' => $exists[rand(0, 3)],
             ]);
 
             $reviews = rand(15, 20);
