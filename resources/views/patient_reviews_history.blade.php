@@ -37,10 +37,10 @@
                     <hr>
                     <div class="col-sm-12"  style="text-align: center">
                         <div class="row">
-                            <div class="col-sm-4 form-group">
+                            <div class="col-sm-3 form-group">
                                 <br> <label> <b>اسم المريض :</b> {{ $patient->patient_name }}</label>
                             </div>
-                            <div class="col-sm-4 form-group">
+                            <div class="col-sm-3 form-group">
                                 <br> <label>
                                     <b> الطول :</b> {{ $patient->patient_height }} سم
                                 </label>
@@ -59,6 +59,22 @@
                             </div>
                             <div class="col-sm-3 form-group">
                                 <br> <label> <b> نسبة السوائل : </b> {{ $review->fluid_ratio }} %</label>
+                            </div>
+
+                            <div class="col-sm-3 form-group">
+                                <br> <label> <b> محيط العضد والمعصم : </b> {{ $review->circumference_of_the_upper_arm_and_wrist }}</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <br> <label> <b> محيط الخصر : </b> {{ $review->waistline }}</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <br> <label> <b> الورك : </b> {{ $review->hip }}</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <br> <label> <b> الصدر : </b> {{ $review->chest }}</label>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <br> <label> <b> الفخذ : </b> {{ $review->thigh }}</label>
                             </div>
                         </div>
                     </div>

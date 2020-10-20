@@ -23,6 +23,8 @@ Route::group([
     Route::get('charts/monthly-patients', 'Charts\MonthlyPatientsChartController@response')->name('charts.monthly-patients.index');
     Route::get('charts/monthly-earnings', 'Charts\MonthlyEarningsChartController@response')->name('charts.monthly-earnings.index');
     Route::get('charts/patients-gender', 'Charts\PatientsGenderChartController@response')->name('charts.patients-gender.index');
+    Route::get('charts/patients-diabetes', 'Charts\DiabetesChartController@response')->name('charts.patients-diabetes.index');
+    Route::get('charts/patients-bco', 'Charts\BcoChartController@response')->name('charts.patients-bco.index');
 
     Route::post('patientform/store', 'PatientFormCrudController@store')->name('patientFormStore');
     Route::get('patientreviewshistory/{patientId}', 'PatientFormCrudController@reviewsHistory')->name('patientReviewsHistory');

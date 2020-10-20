@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    
+
     protected $data = []; // the information we send to the view
 
     /**
@@ -20,16 +20,17 @@ class DashboardController extends Controller
     {
         $this->middleware(backpack_middleware());
     }
-    
-    public function index(){
+
+    public function index()
+    {
         $this->data['breadcrumbs'] = [
             trans('backpack::crud.admin')     => backpack_url('dashboard'),
             trans('backpack::base.dashboard') => false,
         ];
 
         $this->data['widgets']['before_content'][] = [
-            'type' => 'div', 
-            'class' => 'row', 
+            'type' => 'div',
+            'class' => 'row',
             'content' => [
                 [
                     'type'        => 'progress_white',
@@ -66,12 +67,12 @@ class DashboardController extends Controller
             'type'       => 'chart',
             'controller' => \App\Http\Controllers\Admin\Charts\MonthlyPatientsChartController::class,
             // OPTIONALS
-        
+
             'class'   => 'card mb-2',
-            'wrapper' => ['class'=> 'col-md-12'] ,
+            'wrapper' => ['class' => 'col-md-12'],
             'content' => [
-                 'header' => 'عدد المراجعات لهذه السنة', 
-                 'body'   => '',
+                'header' => 'عدد المراجعات لهذه السنة',
+                'body'   => '',
             ],
         ];
 
@@ -79,28 +80,58 @@ class DashboardController extends Controller
             'type'       => 'chart',
             'controller' => \App\Http\Controllers\Admin\Charts\MonthlyEarningsChartController::class,
             // OPTIONALS
-        
+
             'class'   => 'card mb-2',
-            'wrapper' => ['class'=> 'col-md-12'] ,
+            'wrapper' => ['class' => 'col-md-12'],
             'content' => [
-                 'header' => 'الأرباح أخر 12 شهر', 
-                 'body'   => '',
+                'header' => 'الأرباح أخر 12 شهر',
+                'body'   => '',
             ],
         ];
+
 
         $this->data['widgets']['before_content'][] = [
-            'type'       => 'chart',
-            'controller' => \App\Http\Controllers\Admin\Charts\PatientsGenderChartController::class,
-            // OPTIONALS
-        
-            'class'   => 'card mb-2',
-            'wrapper' => ['class'=> 'col-md-6'] ,
+            'type' => 'div',
+            'class' => 'row',
             'content' => [
-                 'header' => 'جنس المراجعين', 
-                 'body'   => '',
-            ],
-        ];
+                [
+                    'type'       => 'chart',
+                    'controller' => \App\Http\Controllers\Admin\Charts\DiabetesChartController::class,
+                    // OPTIONALS
 
+                    'class'   => 'card mb-2',
+                    'wrapper' => ['class' => 'col-md-4'],
+                    'content' => [
+                        'header' => 'مرضى السكري',
+                        'body'   => '',
+                    ],
+                ],
+                [
+                    'type'       => 'chart',
+                    'controller' => \App\Http\Controllers\Admin\Charts\BcoChartController::class,
+                    // OPTIONALS
+
+                    'class'   => 'card mb-2',
+                    'wrapper' => ['class' => 'col-md-4'],
+                    'content' => [
+                        'header' => 'مرضى BCO',
+                        'body'   => '',
+                    ],
+                ],
+                [
+                    'type'       => 'chart',
+                    'controller' => \App\Http\Controllers\Admin\Charts\PatientsGenderChartController::class,
+                    // OPTIONALS
+
+                    'class'   => 'card mb-2',
+                    'wrapper' => ['class' => 'col-md-4'],
+                    'content' => [
+                        'header' => 'جنس المراجعين',
+                        'body'   => '',
+                    ],
+                ]
+            ]
+        ];
         return view(backpack_view('dashboard'), $this->data);
     }
 }

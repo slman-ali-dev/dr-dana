@@ -7,6 +7,7 @@ use App\Models\PatientForm;
 use App\Models\PatientReview;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -61,7 +62,11 @@ class PatientFormCrudController extends CrudController
         CRUD::addColumn(['name' => 'gender_trans', 'label' => trans('backpack::common.gender'), 'type' => 'text']);
         CRUD::addColumn(['name' => 'age', 'label' => trans('backpack::common.age'), 'type' => 'text']);
         CRUD::addColumn(['name' => 'patient_height', 'label' => trans('backpack::common.patient_height'), 'type' => 'text']);
-        CRUD::addColumn(['name' => 'weight', 'label' => trans('backpack::common.current_weight'), 'type' => 'text']);
+        CRUD::addColumn([
+            'name' => 'weight',
+            'label' => trans('backpack::common.current_weight'),
+            'type' => 'text'
+        ]);
         CRUD::addColumn([
             'name' => 'last_review_date',
             'label' => trans('backpack::common.last_review_date'),
@@ -279,7 +284,8 @@ class PatientFormCrudController extends CrudController
             "fats" => $request->fats,
             "phone" => $request->phone,
             "address" => $request->address,
-            "living" => $request->living
+            "living" => $request->living,
+            "bco" => $request->bco,
         ]);
 
 
@@ -301,7 +307,12 @@ class PatientFormCrudController extends CrudController
             "waistline" => $request->waistline,
             "hip" => $request->hip,
             "chest" => $request->chest,
-            "thigh" => $request->thigh
+            "thigh" => $request->thigh,
+            "current_amount_of_fluid" => $request->current_amount_of_fluid,
+            "date" => Carbon::now()->toDateTimeString(),
+
+            "basal_metabolic_rate" => $request->basal_metabolic_rate,
+            "general_metabolic_rate" => $request->general_metabolic_rate,
         ]);
 
         return redirect()->route('patientform.index');

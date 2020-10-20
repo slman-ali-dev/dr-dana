@@ -122,17 +122,29 @@
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>أمراض السكري</label>
-                                <textarea name="diabetes" type="text" rows="3" placeholder="أدخل وصفا للحالة"
-                                    class="form-control"></textarea>
+                                <select name="diabetes" class="form-control">
+                                    <option value="لا يوجد"
+                                     >لا يوجد </option>
+                                    <option value="يوجد"
+                                    >يوجد</option>
+                                </select>
                             </div>
                             <div class="col-sm-6 form-group">
+                                <label>BCO</label>
+                                <select name="bco" class="form-control">
+                                    <option value="لا يوجد"
+                                     >لا يوجد </option>
+                                    <option value="يوجد"
+                                    >يوجد</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
                                 <label>امراض الغدد</label>
                                 <textarea name="endocrine_diseases" type="text" rows="3" placeholder="أدخل وصفا للحالة"
                                     class="form-control"></textarea>
                             </div>
-
-                        </div>
-                        <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>وجود أمراض أخرى</label>
                                 <textarea name="other_diseases" type="text" rows="3" placeholder="أدخل وصفا للحالة"
@@ -161,6 +173,7 @@
                                 <input name="health_assessment_hairfall" type="text" placeholder="" class="form-control">
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-sm-3 form-group">
                                 <label>القرحة المعدية</label>
@@ -268,7 +281,7 @@
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label> نسبة السوائل</label>
-                                    <input name="the_amount_of_fluid_needed" type="text" placeholder="" class="form-control">
+                                    <input name="current_amount_of_fluid" type="text" placeholder="" class="form-control">
                                 </div>
                                 <div class="col-sm-4 form-group">
                                     <label> نسبة العضلات</label>
@@ -276,10 +289,29 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4 form-group">
-                                    <label>النشاط الفيزيائي</label>
-                                    <input name="physical_activity" type="text" placeholder="" class="form-control">
-                                </div>
+                            <div class="col-sm-3 form-group">
+                                <label>الكمية اللازمة من السوائل</label>
+                                <input name="the_amount_of_fluid_needed" type="text" placeholder="" class="form-control">
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>النشاط الفيزيائي</label>
+                                <select name="physical_activity" class="form-control">
+                                    <option value="1.2">1.2</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="1.7">1.7</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>معدل الاستقلاب الأساسي</label>
+                                <input name="basal_metabolic_rate" onkeyup="calcBMI()" type="number" placeholder="" class="form-control">
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label>معدل الاستقلاب العام</label>
+                                <input name="general_metabolic_rate" type="text" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                            <div class="row">
                                 <div class="col-sm-4 form-group">
                                     <label> كتلة العظام </label>
                                     <input name="bone_mass" type="text" placeholder="" class="form-control">
@@ -361,12 +393,35 @@
             let height_m = patient_height / 100;
             let current_weight = document.getElementsByName("current_weight")[0].value;
             let patient_age = document.getElementsByName("age")[0].value;
-            
+            let basal_metabolic_rate = document.getElementsByName("basal_metabolic_rate")[0].value;
+
+            let physical_activity = document.getElementsByName("physical_activity")[0];
+            physical_activity = physical_activity.options[physical_activity.selectedIndex].value;
+
             let gender = document.getElementsByName("gender")[0];
             gender = gender.options[gender.selectedIndex].value;
 
             if(height_m > 0){
-                document.getElementsByName("BMI")[0].value = parseFloat(current_weight / (height_m * height_m)).toFixed(4);
+                let bmi = parseFloat(current_weight / (height_m * height_m)).toFixed(4);
+                document.getElementsByName("BMI")[0].value = bmi;
+                let degree_of_obesity = "";
+                
+                if(bmi > 0 && bmi < 20){
+                    degree_of_obesity = "نقص وزن";
+                }else if(bmi >= 20 && bmi < 25){
+                    degree_of_obesity = "وزن ضعيف";
+                }else if(bmi >= 25 && bmi < 30){ 
+                    degree_of_obesity = "زيادة وزن";
+                }else if(bmi >= 30 && bmi < 35){
+                    degree_of_obesity = "بدانة درجة أولى";
+                }else if(bmi >= 35 && bmi < 40){
+                    degree_of_obesity = "بدانة درجة ثانية";
+                }else if(bmi >= 40 && bmi < 45){
+                    degree_of_obesity = "بدانة درجة ثالثة";
+                }else if(bmi >= 45){
+                    degree_of_obesity = "بدانة مفرطة مرضية";
+                }
+                document.getElementsByName("the_degree_of_obesity")[0].value = degree_of_obesity;
             }
             if(current_weight > 0){
                 document.getElementsByName("the_amount_of_fluid_needed")[0].value = 175 + (current_weight * 15);
@@ -375,6 +430,10 @@
                 document.getElementsByName("daily_calories")[0].value = 655.10 + (6.56 * current_weight) + (1.85 * patient_height) - (4.68 * patient_age);
             }else if(gender == "female"){
                 document.getElementsByName("daily_calories")[0].value = 66.7 + (13.75 * current_weight) + (5 * patient_height) - (6.76 * patient_age);
+            }
+
+            if(basal_metabolic_rate > 0){
+                document.getElementsByName("general_metabolic_rate")[0].value = basal_metabolic_rate * physical_activity;
             }
 
             if(patient_height > 0){

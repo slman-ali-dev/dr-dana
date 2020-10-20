@@ -42,6 +42,7 @@ return [
     "loss_of_appetite" => "فقدان شهية",
     "sleep" => "النوم",
     "smoking" => "التدخين",
+    "malabsorption" => "سوء امتصاص",
     "id" => "رقم المعرف",
 
     "patient_height" => "طول المريض",
@@ -60,6 +61,9 @@ return [
     "hip" => "الورك",
     "chest" => "الصدر",
     "thigh" => "الفخذ",
+    "activity" => "النشاط",
+    "basal_metabolic_rate" => "معدل الاستقلاب الأساسي",
+    "general_metabolic_rate" => "معدل الاستقلاب العام",
 
     "sugar" => "السكر",
     "pigment" => "الخضاب",

@@ -35,6 +35,9 @@ class CreatePatientReviewsTable extends Migration
             $table->string('hip')->nullable();
             $table->string('chest')->nullable();
             $table->string('thigh')->nullable();
+            $table->string('current_amount_of_fluid')->nullable();
+            $table->string('basal_metabolic_rate')->nullable();
+            $table->string('general_metabolic_rate')->nullable();
 
             $table->index(['patient_form_id', 'date']);
 

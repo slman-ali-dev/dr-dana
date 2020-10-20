@@ -25,7 +25,7 @@ class CreatePatientFormsTable extends Migration
             $table->string('pregnant')->nullable();
             $table->string('breastfeeding')->nullable();
             $table->string('period')->nullable();
-            $table->longText('diabetes')->nullable();
+            $table->string('diabetes')->nullable();
             $table->longText('endocrine_diseases')->nullable();
             $table->longText('other_diseases')->nullable();
             $table->longText('past_surgery')->nullable();
@@ -57,6 +57,8 @@ class CreatePatientFormsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('living')->nullable();
+            $table->string('malabsorption')->nullable();
+            $table->string('bco')->nullable(); // add chart to it
 
             $table->timestamps();
         });
