@@ -28,8 +28,11 @@ class PatientSeeder extends Seeder
             "لا يوجد",
             "لا يوجد",
             "لا يوجد",
+            "لا يوجد",
+            "لا يوجد",
+            "لا يوجد",
         ];
-        for ($i = 1; $i < 40; ++$i) {
+        for ($i = 1; $i < 200; ++$i) {
             $gender = $genders[rand(0, 50) > 40 ? rand(0, 2) : rand(0, 1)];
             $patient = PatientForm::create([
                 'patient_name' => $faker->name([$gender]),
@@ -38,11 +41,11 @@ class PatientSeeder extends Seeder
                 'job' => $faker->jobTitle,
                 'created_at' => mt_rand($startOfYear, $endOfYear),
                 'patient_height' => rand(155, 200),
-                'bco' => $exists[rand(0, 3)],
-                'diabetes' => $exists[rand(0, 3)],
+                'bco' => $exists[rand(0, 6)],
+                'diabetes' => $exists[rand(0, 2)],
             ]);
 
-            $reviews = rand(15, 20);
+            $reviews = rand(1, 15);
             while ($reviews-- > 0) {
                 $earn = rand(2000, 7500);
                 PatientReview::create([
