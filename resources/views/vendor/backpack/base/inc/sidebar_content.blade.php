@@ -4,3 +4,5 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('patientreview') }}'><i class='nav-icon la la-edit'></i> المراجعات </a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('patientlaboratorytest') }}'><i class='nav-icon la la-hospital-o'></i> التحاليل المخبرية </a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('calendar') }}'><i class='nav-icon la la-calendar-o'></i> التقويم </a></li>
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('backup') }}'><i class='nav-icon la la-hdd-o'></i> النسخ الاحتياطي</a></li>
